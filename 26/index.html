@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICT B.E. Course Structure</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile.min.css" />
+    <style>
+        .section-title {
+            font-size: 1.5em;
+            padding: 10px;
+            background-color: #0073e6;
+            color: white;
+            cursor: pointer;
+        }
+        .subject-list {
+            padding-left: 20px;
+            padding-bottom: 10px;
+        }
+        .subject {
+            margin-bottom: 5px;
+        }
+        .description {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+    <div data-role="page">
+        <div data-role="header">
+            <h1>PICT B.E. Course Structure</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <!-- First Year (FE) -->
+            <div class="section">
+                <div class="section-title">First Year (FE)</div>
+                <div class="subject-list">
+                    <div class="subject">
+                        <strong>Mathematics I</strong><br>
+                        <span class="description">Introduction to calculus, algebra, and trigonometry.</span>
+                    </div>
+                    <div class="subject">
+                        <strong>Physics</strong><br>
+                        <span class="description">Fundamentals of physics including mechanics and waves.</span>
+                    </div>
+                    <!-- Add more subjects here -->
+                </div>
+            </div>
+
+            <!-- Second Year (SE) -->
+            <div class="section">
+                <div class="section-title">Second Year (SE)</div>
+                <div class="subject-list">
+                    <div class="subject">
+                        <strong>Data Structures</strong><br>
+                        <span class="description">Introduction to algorithms and data structures.</span>
+                    </div>
+                    <div class="subject">
+                        <strong>Digital Electronics</strong><br>
+                        <span class="description">Study of digital circuits and logic gates.</span>
+                    </div>
+                    <!-- Add more subjects here -->
+                </div>
+            </div>
+
+            <!-- Third Year (TE) -->
+            <div class="section">
+                <div class="section-title">Third Year (TE)</div>
+                <div class="subject-list">
+                    <div class="subject">
+                        <strong>Operating Systems</strong><br>
+                        <span class="description">Study of OS concepts, processes, and file management.</span>
+                    </div>
+                    <div class="subject">
+                        <strong>Database Management Systems</strong><br>
+                        <span class="description">Fundamentals of databases, SQL, and database design.</span>
+                    </div>
+                    <!-- Add more subjects here -->
+                </div>
+            </div>
+
+            <!-- Final Year (BE) -->
+            <div class="section">
+                <div class="section-title">Final Year (BE)</div>
+                <div class="subject-list">
+                    <div class="subject">
+                        <strong>Software Engineering</strong><br>
+                        <span class="description">Study of software development processes and methodologies.</span>
+                    </div>
+                    <div class="subject">
+                        <strong>Machine Learning</strong><br>
+                        <span class="description">Introduction to machine learning algorithms and techniques.</span>
+                    </div>
+                    <!-- Add more subjects here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Toggle subject list on clicking the section title
+            $(".section-title").click(function() {
+                $(this).next(".subject-list").slideToggle();
+            });
+        });
+    </script>
+</body>
+</html>

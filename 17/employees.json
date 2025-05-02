@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "designation": "Software Engineer",
+      "department": "Engineering",
+      "salary": "5000",
+      "profileImage": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "designation": "HR Manager",
+      "department": "Human Resources",
+      "salary": "4500",
+      "profileImage": "https://via.placeholder.com/150"
+    },
+    {
+      "id": 3,
+      "name": "David Clark",
+      "designation": "Data Scientist",
+      "department": "Engineering",
+      "salary": "5500",
+      "profileImage": "https://via.placeholder.com/150"
+    }
+  ]
+  

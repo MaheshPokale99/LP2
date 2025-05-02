@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>PICT Student Clubs</title>
+
+    <!-- jQuery Mobile CSS and JS -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <!-- Linking local CSS and JS -->
+    <!-- <link rel="stylesheet" href="css/jquery.mobile.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile.min.js"></script> -->
+    <style>
+        .club-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .achievement-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .achievement-list li {
+            background: #e0f7fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+
+        .section-title {
+            color: #0072c6;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Home Page -->
+    <div data-role="page" id="home">
+        <div data-role="header" data-theme="b">
+            <h1>PICT Clubs</h1>
+            <div data-role="navbar">
+                <ul>
+                    <li><a href="#home" class="ui-btn-active ui-state-persist">Home</a></li>
+                    <li><a href="#coding">Coding</a></li>
+                    <li><a href="#robotics">Robotics</a></li>
+                    <li><a href="#dance">Dance</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div role="main" class="ui-content">
+            <h2>Welcome to PICT Clubs</h2>
+            <p>Explore the vibrant student clubs and extracurricular activities at PICT!</p>
+            <img src="https://via.placeholder.com/350x200?text=PICT+Clubs" alt="PICT Clubs" class="club-image">
+        </div>
+    </div>
+
+    <!-- Coding Club -->
+    <div data-role="page" id="coding" data-theme="a" data-transition="fade">
+        <div data-role="header" data-theme="b">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Coding Club</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <img src="https://via.placeholder.com/350x200?text=Coding+Club" alt="Coding Club" class="club-image">
+            <h3 class="section-title">About the Coding Club</h3>
+            <p>The Coding Club encourages students to enhance their programming skills through hackathons, coding
+                contests, and workshops.</p>
+
+            <h3 class="section-title">Achievements</h3>
+            <ul class="achievement-list">
+                <li>Winners of National Hackathon 2023</li>
+                <li>Organized 10+ coding competitions</li>
+                <li>Members placed in top 1% of Codeforces</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Robotics Club -->
+    <div data-role="page" id="robotics" data-theme="a" data-transition="fade">
+        <div data-role="header" data-theme="b">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Robotics Club</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <img src="https://via.placeholder.com/350x200?text=Robotics+Club" alt="Robotics Club" class="club-image">
+            <h3 class="section-title">About the Robotics Club</h3>
+            <p>The Robotics Club builds, programs, and competes with robots. It encourages innovation and hands-on
+                engineering experience.</p>
+
+            <h3 class="section-title">Achievements</h3>
+            <ul class="achievement-list">
+                <li>Finalists at Robocon 2024</li>
+                <li>Developed Autonomous Navigation Systems</li>
+                <li>Best Design Award at TechExpo</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Dance Club -->
+    <div data-role="page" id="dance" data-theme="a" data-transition="fade">
+        <div data-role="header" data-theme="b">
+            <a href="#home" data-icon="home" data-iconpos="notext">Home</a>
+            <h1>Dance Club</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+            <img src="https://via.placeholder.com/350x200?text=Dance+Club" alt="Dance Club" class="club-image">
+            <h3 class="section-title">About the Dance Club</h3>
+            <p>The Dance Club nurtures the artistic and cultural talents of students, organizing performances at college
+                fests and national competitions.</p>
+
+            <h3 class="section-title">Achievements</h3>
+            <ul class="achievement-list">
+                <li>Winners at Pune Dance Festival 2023</li>
+                <li>Performed at National Youth Festival</li>
+                <li>Organized PICT Dance Fest 2024</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+
+</html>
