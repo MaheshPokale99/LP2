@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Registration System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 400px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group input.error {
+            border-color: red;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .toggle-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .toggle-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="formContainer">
+        <!-- Login Form -->
+        <div id="loginForm" style="display: block;">
+            <h2>Login</h2>
+            <div class="form-group">
+                <label for="loginUsername">Username</label>
+                <input type="text" id="loginUsername" placeholder="Enter username">
+                <span class="error-message" id="loginUsernameError">Username is required</span>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input type="password" id="loginPassword" placeholder="Enter password">
+                <span class="error-message" id="loginPasswordError">Password is required</span>
+            </div>
+            <button onclick="handleLogin()">Login</button>
+            <div class="toggle-link">
+                <a href="#" onclick="toggleForm('register')">Don't have an account? Register</a>
+            </div>
+        </div>
+
+        <!-- Registration Form -->
+        <div id="registerForm" style="display: none;">
+            <h2>Register</h2>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Enter name">
+                <span class="error-message" id="nameError">Name is required and should only contain letters</span>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Enter email">
+                <span class="error-message" id="emailError">Valid email is required</span>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="text" id="mobile" placeholder="Enter mobile number">
+                <span class="error-message" id="mobileError">Valid 10-digit mobile number is required</span>
+            </div>
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob">
+                <span class="error-message" id="dobError">Date of birth is required and must be in the past</span>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" placeholder="Enter city">
+                <span class="error-message" id="cityError">City is required</span>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="address" placeholder="Enter address">
+                <span class="error-message" id="addressError">Address is required</span>
+            </div>
+            <button onclick="handleRegister()">Register</button>
+            <div class="toggle-link">
+                <a href="#" onclick="toggleForm('login')">Already have an account? Login</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data List Page -->
+    <div class="container" id="dataContainer" style="display: none;">
+        <h2>Registered Users</h2>
+        <table class="data-table" id="dataTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>DOB</th>
+                    <th>City</th>
+                    <th>Address</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <button onclick="showForm()">Back to Form</button>
+    </div>
+
+    <script>
+        // Validation functions
+        function validateName(name) {
+            return /^[A-Za-z\s]+$/.test(name) && name.trim().length > 0;
+        }
+
+        function validateEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function validateMobile(mobile) {
+            return /^[0-9]{10}$/.test(mobile);
+        }
+
+        function validateDob(dob) {
+            const today = new Date();
+            const dobDate = new Date(dob);
+            return dobDate < today;
+        }
+
+        function validateField(value) {
+            return value.trim().length > 0;
+        }
+
+        // Show/hide error messages
+        function showError(inputId, errorId, show) {
+            const input = document.getElementById(inputId);
+            const error = document.getElementById(errorId);
+            error.style.display = show ? 'block' : 'none';
+            input.classList.toggle('error', show);
+        }
+
+        // Toggle between login and register forms
+        function toggleForm(formType) {
+            document.getElementById('loginForm').style.display = formType === 'login' ? 'block' : 'none';
+            document.getElementById('registerForm').style.display = formType === 'register' ? 'block' : 'none';
+        }
+
+        // Show form container
+        function showForm() {
+            document.getElementById('formContainer').style.display = 'block';
+            document.getElementById('dataContainer').style.display = 'none';
+        }
+
+        // Handle registration
+        function handleRegister() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+            const dob = document.getElementById('dob').value;
+            const city = document.getElementById('city').value;
+            const address = document.getElementById('address').value;
+
+            // Validate inputs
+            const isNameValid = validateName(name);
+            const isEmailValid = validateEmail(email);
+            const isMobileValid = validateMobile(mobile);
+            const isDobValid = validateDob(dob);
+            const isCityValid = validateField(city);
+            const isAddressValid = validateField(address);
+
+            showError('name', 'nameError', !isNameValid);
+            showError('email', 'emailError', !isEmailValid);
+            showError('mobile', 'mobileError', !isMobileValid);
+            showError('dob', 'dobError', !isDobValid);
+            showError('city', 'cityError', !isCityValid);
+            showError('address', 'addressError', !isAddressValid);
+
+            if (isNameValid && isEmailValid && isMobileValid && isDobValid && isCityValid && isAddressValid) {
+                const userData = { name, email, mobile, dob, city, address };
+
+                // Simulate AJAX POST request
+                fetch('https://jsonplaceholder.typicode.com/posts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(userData),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Store in localStorage
+                    let users = JSON.parse(localStorage.getItem('users')) || [];
+                    users.push(userData);
+                    localStorage.setItem('users', JSON.stringify(users));
+
+                    alert('Registration successful!');
+                    showDataPage();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Registration failed. Please try again.');
+                });
+            }
+        }
+
+        // Handle login
+        function handleLogin() {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            const isUsernameValid = validateField(username);
+            const isPasswordValid = validateField(password);
+
+            showError('loginUsername', 'loginUsernameError', !isUsernameValid);
+            showError('loginPassword', 'loginPasswordError', !isPasswordValid);
+
+            if (isUsernameValid && isPasswordValid) {
+                alert('Login successful!');
+                showDataPage();
+            }
+        }
+
+        // Show data page with registered users
+        function showDataPage() {
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const dataTable = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+
+            // Clear previous data
+            dataTable.innerHTML = '';
+
+            // Add new rows
+            users.forEach(user => {
+                const row = dataTable.insertRow();
+                Object.values(user).forEach((value) => {
+                    const cell = row.insertCell();
+                    cell.textContent = value;
+                });
+            });
+
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('dataContainer').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
