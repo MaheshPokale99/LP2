@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "name": "Mahesh Pokale",
+        "email": "mahesh.pokale@example.com"
+    },
+    {
+        "id": 2,
+        "name": "Dhiraj Patil",
+        "email": "dhiraj.patil@example.com"
+    },
+    {
+        "id": 3,
+        "name": "Aryan Sharma",
+        "email": "aryan.sharma@example.com"
+    },
+    {
+        "id": 4,
+        "name": "Sarvesh Deshmukh",
+        "email": "sarvesh.deshmukh@example.com"
+    },
+    {
+        "id": 5,
+        "name": "Tanmay Joshi",
+        "email": "tanmay.joshi@example.com"
+    }
+]

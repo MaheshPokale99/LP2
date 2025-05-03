@@ -1,0 +1,33 @@
+{
+    "Delhi": {
+      "temperature": 35,
+      "weather": "Hot and Sunny",
+      "humidity": 55,
+      "windSpeed": 4
+    },
+    "Mumbai": {
+      "temperature": 30,
+      "weather": "Partly Cloudy",
+      "humidity": 65,
+      "windSpeed": 6
+    },
+    "Chennai": {
+      "temperature": 32,
+      "weather": "Humid and Cloudy",
+      "humidity": 75,
+      "windSpeed": 5
+    },
+    "Bangalore": {
+      "temperature": 26,
+      "weather": "Pleasant",
+      "humidity": 60,
+      "windSpeed": 3
+    },
+    "Pune": {
+      "temperature": 28,
+      "weather": "Cloudy",
+      "humidity": 70,
+      "windSpeed": 7
+    }
+  }
+  

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 16px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f4f4f4;
+            margin: 8px 0;
+            padding: 12px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        li span {
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .task-completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .delete-btn {
+            background-color: red;
+        }
+
+        .edit-btn {
+            background-color: orange;
+        }
+
+        .delete-btn:hover {
+            background-color: darkred;
+        }
+
+        .edit-btn:hover {
+            background-color: darkorange;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+        <input type="text" id="taskInput" placeholder="Enter a new task">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="todoList"></ul>
+    </div>
+
+    <script>
+        // Load tasks from the server
+        function loadTasks() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', 'http://localhost:3000/todos', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const tasks = JSON.parse(xhr.responseText);
+                    const todoList = document.getElementById('todoList');
+                    todoList.innerHTML = '';
+                    tasks.forEach(task => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `
+                            <span class="${task.completed ? 'task-completed' : ''}" onclick="toggleCompletion(${task.id}, '${task.task}', ${task.completed})">${task.task}</span>
+                            <button class="edit-btn" onclick="editTask(${task.id}, '${task.task}', ${task.completed})">Edit</button>
+                            <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+                        `;
+                        todoList.appendChild(li);
+                    });
+                }
+            };
+            xhr.send();
+        }
+
+        // Add a new task
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const task = taskInput.value.trim();
+            if (task) {
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'http://localhost:3000/todos', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        taskInput.value = '';
+                        loadTasks();
+                    }
+                };
+                xhr.send(JSON.stringify({ task }));
+            }
+        }
+
+        // Toggle task completion
+        function toggleCompletion(id, task, completed) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('PUT', `http://localhost:3000/todos/${id}`, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    loadTasks();
+                }
+            };
+            xhr.send(JSON.stringify({ task, completed: !completed }));
+        }
+
+        // Edit task text
+        function editTask(id, oldTask, completed) {
+            const newTask = prompt('Edit your task:', oldTask);
+            if (newTask && newTask.trim() !== '') {
+                const xhr = new XMLHttpRequest();
+                xhr.open('PUT', `http://localhost:3000/todos/${id}`, true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        loadTasks();
+                    }
+                };
+                xhr.send(JSON.stringify({ task: newTask.trim(), completed }));
+            }
+        }
+
+        // Delete task
+        function deleteTask(id) {
+            const xhr = new XMLHttpRequest();
+            xhr.open('DELETE', `http://localhost:3000/todos/${id}`, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    loadTasks();
+                }
+            };
+            xhr.send();
+        }
+
+        // Load tasks on page load
+        window.onload = loadTasks;
+    </script>
+</body>
+</html>

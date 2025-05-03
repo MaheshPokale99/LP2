@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movie Reviews</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <style>
+        /* Styling for each movie container */
+        .movie-container {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling for movie poster */
+        .movie-poster {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* Styling for the text container */
+        .movie-details {
+            padding: 15px;
+        }
+
+        /* Movie Title Styling */
+        .movie-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Movie Genre Styling */
+        .movie-genre {
+            font-size: 1.2em;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        /* Movie Summary Styling */
+        .movie-summary {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Movie Review Styling */
+        .movie-review {
+            font-size: 1em;
+            color: #333;
+            background-color: #f8f8f8;
+            padding: 12px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer Styling */
+        .footer-text {
+            text-align: center;
+            font-size: 1.2em;
+            padding: 10px;
+        }
+
+        /* Ensuring good spacing and responsiveness on mobile */
+        @media (max-width: 600px) {
+            .movie-poster {
+                max-width: 100%;
+            }
+
+            .movie-title {
+                font-size: 1.3em;
+            }
+
+            .movie-genre, .movie-summary {
+                font-size: 1em;
+            }
+
+            .movie-review {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div data-role="page" id="movieReviews">
+        <!-- Page Header -->
+        <div data-role="header" data-theme="b">
+            <h1>Movie Reviews</h1>
+        </div>
+
+        <!-- Page Content -->
+        <div data-role="content">
+            <!-- Movie 1 -->
+            <div class="movie-container">
+                <img src="https://via.placeholder.com/300x400" alt="Movie Poster 1" class="movie-poster" />
+                <div class="movie-details">
+                    <div class="movie-title">Movie Title 1</div>
+                    <div class="movie-genre"><strong>Genre:</strong> Action, Thriller</div>
+                    <div class="movie-summary"><strong>Summary:</strong> A thrilling action-packed adventure where the protagonist must outsmart an enemy.</div>
+                    <div class="movie-review"><strong>Review:</strong> "A high-octane movie with mind-blowing action sequences. The plot is gripping, but the character development feels a bit shallow." - Movie Critic</div>
+                </div>
+            </div>
+
+            <!-- Movie 2 -->
+            <div class="movie-container">
+                <img src="https://via.placeholder.com/300x400" alt="Movie Poster 2" class="movie-poster" />
+                <div class="movie-details">
+                    <div class="movie-title">Movie Title 2</div>
+                    <div class="movie-genre"><strong>Genre:</strong> Drama, Romance</div>
+                    <div class="movie-summary"><strong>Summary:</strong> A heartwarming love story set in a beautiful town.</div>
+                    <div class="movie-review"><strong>Review:</strong> "A touching and emotional story. The chemistry between the leads is undeniable, though the pacing feels slow at times." - Movie Critic</div>
+                </div>
+            </div>
+
+            <!-- Movie 3 -->
+            <div class="movie-container">
+                <img src="https://via.placeholder.com/300x400" alt="Movie Poster 3" class="movie-poster" />
+                <div class="movie-details">
+                    <div class="movie-title">Movie Title 3</div>
+                    <div class="movie-genre"><strong>Genre:</strong> Horror</div>
+                    <div class="movie-summary"><strong>Summary:</strong> A spine-chilling tale that will keep you on the edge of your seat.</div>
+                    <div class="movie-review"><strong>Review:</strong> "An atmospheric horror film that uses tension and suspense masterfully. The jump scares are effective, but the story feels predictable." - Movie Critic</div>
+                </div>
+            </div>
+
+            <!-- Movie 4 -->
+            <div class="movie-container">
+                <img src="https://via.placeholder.com/300x400" alt="Movie Poster 4" class="movie-poster" />
+                <div class="movie-details">
+                    <div class="movie-title">Movie Title 4</div>
+                    <div class="movie-genre"><strong>Genre:</strong> Comedy</div>
+                    <div class="movie-summary"><strong>Summary:</strong> A lighthearted comedy that delivers plenty of laughs.</div>
+                    <div class="movie-review"><strong>Review:</strong> "A fun and entertaining ride from start to finish. The jokes are clever, and the characters are lovable, but the storyline lacks depth." - Movie Critic</div>
+                </div>
+            </div>
+
+            <!-- Movie 5 -->
+            <div class="movie-container">
+                <img src="https://via.placeholder.com/300x400" alt="Movie Poster 5" class="movie-poster" />
+                <div class="movie-details">
+                    <div class="movie-title">Movie Title 5</div>
+                    <div class="movie-genre"><strong>Genre:</strong> Sci-Fi, Adventure</div>
+                    <div class="movie-summary"><strong>Summary:</strong> A futuristic sci-fi epic that explores the boundaries of space and time.</div>
+                    <div class="movie-review"><strong>Review:</strong> "A visually stunning film with impressive special effects, but the narrative is a bit convoluted. Still, a must-watch for sci-fi fans." - Movie Critic</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div data-role="footer" data-theme="b" class="footer-text">
+            <h4>Movie Review App</h4>
+        </div>
+    </div>
+</body>
+</html>

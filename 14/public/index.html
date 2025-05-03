@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User List</title>
+  <style>
+    /* Basic reset for margin and padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Styling the body */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f7fa;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Container for the list */
+    h1 {
+      font-size: 2rem;
+      color: #007BFF;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    li {
+      background-color: #fff;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.1rem;
+    }
+
+    li:nth-child(odd) {
+      background-color: #f9f9f9;
+    }
+
+    li span {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* Hover effect on list items */
+    li:hover {
+      background-color: #e7f4ff;
+      transform: scale(1.02);
+      transition: all 0.3s ease;
+    }
+
+    /* Styling for the error message */
+    .error {
+      color: red;
+      font-size: 1.1rem;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <h1>User List</h1>
+    <ul id="userList"></ul>
+    <div class="error" id="errorMessage"></div>
+  </div>
+
+  <script>
+    async function fetchUsers() {
+      try {
+        const response = await fetch('http://localhost:3000/api/users');
+        const users = await response.json();
+
+        if (users.length === 0) {
+          document.getElementById('errorMessage').textContent = 'No users found.';
+          return;
+        }
+
+        const list = document.getElementById('userList');
+        users.forEach(user => {
+          const li = document.createElement('li');
+          li.innerHTML = `${user.name} <span>${user.email}</span>`;
+          list.appendChild(li);
+        });
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        document.getElementById('errorMessage').textContent = 'Error fetching user data.';
+      }
+    }
+
+    // Call the fetch function when the page loads
+    fetchUsers();
+  </script>
+</body>
+</html>
