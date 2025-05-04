@@ -1,0 +1,12 @@
+<div class="profile-container">
+  <h2>Your Profile</h2>
+  
+  <div class="profile-info">
+    <p><strong>Name:</strong> {{ user.name || 'Not provided' }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>City:</strong> {{ user.city || 'Not provided' }}</p>
+    <p><strong>Gender:</strong> {{ user.gender ? (user.gender | titlecase) : 'Not provided' }}</p>
+  </div>
+  
+  <button class="logout-btn" (click)="authService.logout()">Logout</button>
+</div>

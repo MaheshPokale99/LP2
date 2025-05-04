@@ -1,0 +1,27 @@
+<div class="auth-container">
+  <h2>Create Account</h2>
+  <form (ngSubmit)="register()">
+    <div class="form-group">
+      <input [(ngModel)]="user.name" name="name" placeholder="Full Name" required autocomplete="name" />
+    </div>
+    <div class="form-group">
+      <input [(ngModel)]="user.email" name="email" placeholder="Email" required autocomplete="email" />
+    </div>
+    <div class="form-group">
+      <input [(ngModel)]="user.password" name="password" type="password" placeholder="Password" required autocomplete="new-password" />
+    </div>
+    <div class="form-group">
+      <input [(ngModel)]="user.city" name="city" placeholder="City" autocomplete="address-level2" />
+    </div>
+    <div class="form-group">
+      <select [(ngModel)]="user.gender" name="gender" class="form-control">
+        <option value="" disabled selected>Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <button type="submit">Sign Up</button>
+  </form>
+  <a routerLink="/login">Already have an account? Login</a>
+</div>
