@@ -1,6 +1,7 @@
-const mongoose=require("mongoose");
-const express=require("express");
-const Book=require("./models/Book");
+const mongoose = require("mongoose");
+const express = require("express");
+const Book = require("./models/Book");
+const booksData = require("./booksData");
 
 
 const app = express();
@@ -14,6 +15,15 @@ const connectToDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/bookstore');
     console.log('Connected to MongoDB');
+
+    // Seed data if collection is empty
+    const bookCount = await Book.countDocuments();
+    if (bookCount === 0) {
+      await Book.insertMany(booksData);
+      console.log('Sample book data inserted');
+    } else {
+      console.log('Books collection already contains data');
+    }
   } catch (err) {
     console.error('Error connecting to MongoDB:', err.message);
   }
