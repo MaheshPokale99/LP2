@@ -186,3 +186,78 @@
     </script>
 </body>
 </html>
+
+<!-- <script>
+    const apiUrl = 'http://localhost:3000/todos';
+
+    const showError = (message) => {
+        document.getElementById('errorMessage').innerText = message;
+    };
+
+    const fetchData = (url, options = {}) => {
+        return fetch(url, options)
+            .then(response => {
+                if (!response.ok) throw new Error('Request failed');
+                return response.json();
+            })
+            .catch(error => showError(error.message));
+    };
+
+    const loadTasks = () => {
+        fetchData(apiUrl)
+            .then(tasks => {
+                const todoList = document.getElementById('todoList');
+                todoList.innerHTML = '';
+                tasks.forEach(task => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span class="${task.completed ? 'task-completed' : ''}" onclick="toggleCompletion(${task.id}, '${task.task}', ${task.completed})">${task.task}</span>
+                        <button class="edit-btn" onclick="editTask(${task.id}, '${task.task}', ${task.completed})">Edit</button>
+                        <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+                    `;
+                    todoList.appendChild(li);
+                });
+            });
+    };
+
+    const addTask = () => {
+        const taskInput = document.getElementById('taskInput');
+        const task = taskInput.value.trim();
+        if (!task) return showError("Task cannot be empty!");
+
+        fetchData(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ task })
+        }).then(() => {
+            taskInput.value = '';
+            loadTasks();
+        });
+    };
+
+    const toggleCompletion = (id, task, completed) => {
+        fetchData(`${apiUrl}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ task, completed: !completed })
+        }).then(loadTasks);
+    };
+
+    const editTask = (id, oldTask, completed) => {
+        const newTask = prompt('Edit your task:', oldTask);
+        if (newTask?.trim()) {
+            fetchData(`${apiUrl}/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ task: newTask.trim(), completed })
+            }).then(loadTasks);
+        }
+    };
+
+    const deleteTask = (id) => {
+        fetchData(`${apiUrl}/${id}`, { method: 'DELETE' })
+            .then(loadTasks);
+    };
+
+    window.onload = loadTasks;
+</script> -->
