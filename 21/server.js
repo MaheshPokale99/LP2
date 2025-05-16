@@ -10,7 +10,7 @@ const port = 5000;
 // Middleware
 app.use(cors({ origin: "*" }));
 
-app.use(express.json()); // VERY IMPORTANT
+app.use(express.json());
 
 // MongoDB connection
 const connectToDB = async () => {
